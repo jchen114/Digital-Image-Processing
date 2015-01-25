@@ -6,6 +6,7 @@ Shades different coins with a different gray scale value. Each pixel belonging t
 should have the same gray scale value. 
 
 Algorithm:
+
 1. Iterate through pixels from top to bottom and alternating between left and right traversal.
 
 2. Keep an array (called dist) detailing the last pixel that was seen belonging to a certain region.
