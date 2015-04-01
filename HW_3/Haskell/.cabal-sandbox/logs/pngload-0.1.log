@@ -1,0 +1,28 @@
+Building pngload-0.1...
+Preprocessing library pngload-0.1...
+
+Codec\Image\PNG.hs:1:12: Warning:
+    -fglasgow-exts is deprecated: Use individual extensions instead
+
+Codec\Image\PNG\Internal\CRC.hs:1:12: Warning:
+    -fglasgow-exts is deprecated: Use individual extensions instead
+
+Codec\Image\PNG\Internal\CRC.hs:1:12: Warning:
+    -fbang-patterns is deprecated: use -XBangPatterns or pragma {-# LANGUAGE BangPatterns #-} instead
+
+Codec\Image\PNG\Internal\Filters.hs:1:12: Warning:
+    -fglasgow-exts is deprecated: Use individual extensions instead
+
+Codec\Image\PNG\Internal\Filters.hs:1:12: Warning:
+    -fbang-patterns is deprecated: use -XBangPatterns or pragma {-# LANGUAGE BangPatterns #-} instead
+
+Codec\Image\PNG\Internal\Parser.hs:1:12: Warning:
+    -fglasgow-exts is deprecated: Use individual extensions instead
+
+Codec\Image\PNG.hs:1:1:
+    Ambiguous module name `Prelude':
+      it was found in multiple packages: base haskell98-2.0.0.3
+
+Codec\Image\PNG\Internal\Parser.hs:10:8:
+    Ambiguous module name `Numeric':
+      it was found in multiple packages: base haskell98-2.0.0.3

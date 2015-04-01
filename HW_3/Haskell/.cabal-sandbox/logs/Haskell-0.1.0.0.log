@@ -1,0 +1,6 @@
+Building Haskell-0.1.0.0...
+Preprocessing executable 'Haskell' for Haskell-0.1.0.0...
+[1 of 1] Compiling Main             ( src\Main.hs, dist\dist-sandbox-226b8c24\build\Haskell\Haskell-tmp\Main.o )
+
+src\Main.hs:1:1:
+    The IO action `main' is not defined in module `Main'
