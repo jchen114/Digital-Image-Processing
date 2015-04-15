@@ -2,6 +2,7 @@ __author__ = 'jacobchen2272'
 import pymongo as pym
 from pymongo import errors
 from Final_Project.SIFT_Descriptors.Models import Keypoint as kpt
+from Final_Project.SIFT_Descriptors.Models import SIFT_Object as so
 import numpy as np
 import cv2
 
@@ -23,8 +24,9 @@ class DBManager:
             print 'Creating a new collection'
             self.database.create_collection('SIFT')
 
-    def insert_kp_des(self, kps, des):
-
+    def insert_kp_des(self, sift_object):
+        kps = sift_object.keypoints
+        des = sift_object.descriptors
         for x in range(0, len(kps)):
             kp = kps[x]
             descriptor = des[x]
@@ -43,7 +45,6 @@ class DBManager:
                     "data":str(descriptor)
                 }
             }
-
             self.descriptor_collection.insert_one(sift_obj)
 
     def get_all_sift_objects(self):
