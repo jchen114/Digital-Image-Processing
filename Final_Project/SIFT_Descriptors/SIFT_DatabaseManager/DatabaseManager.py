@@ -1,6 +1,9 @@
 __author__ = 'jacobchen2272'
 import pymongo as pym
 from pymongo import errors
+from Final_Project.SIFT_Descriptors.Models import Keypoint as kpt
+import numpy as np
+import cv2
 
 
 class DBManager:
@@ -22,34 +25,48 @@ class DBManager:
 
     def insert_kp_des(self, kps, des):
 
-        for x in range(0, kps.length):
+        for x in range(0, len(kps)):
             kp = kps[x]
             descriptor = des[x]
             sift_obj = {
                 "keypoint": {
                     "angle": kp.angle,
                     "octave": kp.octave,
-                    "point": (kp.pt[0], kp.pt[1]),
+                    "point": {
+                        'x': kp.pt[0],
+                        'y': kp.pt[1]
+                    },
                     "response": kp.response,
                     "size": kp.size
                 },
                 "descriptor": {
-                    "data":descriptor
+                    "data":str(descriptor)
                 }
             }
 
             self.descriptor_collection.insert_one(sift_obj)
 
     def get_all_sift_objects(self):
-        sift_objects = self.descriptor_collection.find()
+        cursor = self.descriptor_collection.find()
+        sift_objects = cursor[0:cursor.count()]
         kps = []
         dess = []
         for sift_object in sift_objects:
-            keypoint = sift_object.keypoint
-            descriptor = sift_object.descriptor
-            kps.append(keypoint)
-            dess.append(descriptor)
+            keypoint = sift_object['keypoint']
+            kp = kpt.Keypoint(keypoint['angle'], keypoint['octave'], (keypoint['point']['x'], keypoint['point']['y']), keypoint['response'], keypoint['size'])
+            descriptor = sift_object['descriptor']['data']
+            descriptor = descriptor[1:len(descriptor) - 2].replace(".", "")
+            #print descriptor
+            # turn descriptor into a numeric array
+            des = [int(s) for s in descriptor.split()]
+            dess.append(des)
+            kps.append(kp)
+        dess = np.matrix(dess)
         return kps, dess
 
     def delete_all_sift_objects(self):
-        self.descriptor_collection.delete_many()
+        result = self.descriptor_collection.delete_many({})
+        print 'Number of documents deleted = ' + str(result.deleted_count)
+
+    def close(self):
+        self.client.close()
