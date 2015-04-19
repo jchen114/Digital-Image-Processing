@@ -17,12 +17,12 @@ def cluster_sift_objects():
     dess_reduced = pca.transform(dess)
     #plt.scatter(dess_reduced[:,0], dess_reduced[:,1])
     #plt.show()
-    k_means = KMeans(n_clusters=5, random_state=0)  # Fixing the RNG in kmeans
+    k_means = KMeans(n_clusters=7, random_state=0)  # Fixing the RNG in kmeans
     k_means.fit(dess)
     cluster_centers = k_means.cluster_centers_
     y_pred = k_means.predict(dess)
-    pl.scatter(dess_reduced[:, 0], dess_reduced[:, 1], c=y_pred)
-    pl.show()
+    #pl.scatter(dess_reduced[:, 0], dess_reduced[:, 1], c=y_pred)
+    #pl.show()
     km_object = km.K_Means(cluster_centers, y_pred)
     return km_object
 

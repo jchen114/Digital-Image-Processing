@@ -16,8 +16,8 @@ def gaussian_high_pass_image(img_file_name):
     pix = np.asarray(img)
     img_width = pix.shape[1]
     img_height = pix.shape[0]
-    ideal_hp_filter = create_centered_gaussian_high_pass(img_width * 2, img_height * 2, 10)
-    ApplyFilter.apply_filter(pix, ideal_hp_filter, True)
+    hp_filter = create_centered_gaussian_high_pass(img_width * 2, img_height * 2, 10)
+    ApplyFilter.apply_filter(pix, hp_filter, True)
 
 
 def create_centered_gaussian_high_pass(width, height, std_dev):
